@@ -2,8 +2,8 @@
 \(More\) Assembly QC
 =================================================
 
-| Joe Fass - jnfass@ucdavis.edu
-| 14 December 2016
+Joe Fass - jnfass@ucdavis.edu  
+14 December 2016
 
 ------------------------
 N50 and Related Metrics
