@@ -1,23 +1,27 @@
 =================================================
-(More) Assembly QC
+\(More\) Assembly QC
 =================================================
 
-2016-12-14
-Joe Fass
-jnfass@ucdavis.edu
+| Joe Fass - jnfass@ucdavis.edu
+| 14 December 2016
 
-
+------------------------
 N50 and Related Metrics
+------------------------
+
+1.
+
+2. 
 
 3. test N50; list sizes, add cumulative length column, print at desired cumulative length cutoff
 
 ```bash
-zcat bird_2C_scaffolds.fa.gz | \
+cat pet_fungus.draft.fa | \
     ./fa.sizes.pl | sort -rn | \
     perl -ne 'chomp; $c+=$_; print "$_\t$c\n"' | \
     perl -ane 'if ($F[1] >= 500000000) {print; exit}'
-gunzip bird_2C_scaffolds.fa.gz  # for BUSCO, later
 ```
+
 ---
 
 ------
