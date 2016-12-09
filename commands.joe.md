@@ -1,19 +1,11 @@
-=================================================
-\(More\) Assembly QC
-=================================================
+## \(More\) Assembly QC
 
 Joe Fass - jnfass@ucdavis.edu  
 14 December 2016
 
-------------------------
-N50 and Related Metrics
-------------------------
+# N50 and Related Metrics
 
-1.
-
-2. 
-
-3. test N50; list sizes, add cumulative length column, print at desired cumulative length cutoff
+test N50; list sizes, add cumulative length column, print at desired cumulative length cutoff
 
 ```bash
 cat pet_fungus.draft.fa | \
@@ -24,17 +16,15 @@ cat pet_fungus.draft.fa | \
 
 ---
 
-------
-BUSCO
-------
+# BUSCO
 
-1. First download a relevant lineage tarball from [Evgeny Zdobnov's lab](http://busco.ezlab.org/).
+First download a relevant lineage tarball from [Evgeny Zdobnov's lab](http://busco.ezlab.org/).
 
 ```bash
 tar xzvf fungi_odb9.tar.gz
 ```
 
-2. We don't have a module for the most recent BUSCO yet, but the old module sets up the dependencies. So, load the module, but use the newer BUSCO script. Also we need to have a local Augustus config directory, so BUSCO has permission to muck around in it and make changes.
+We don't have a module for the most recent BUSCO yet, but the old module sets up the dependencies. So, load the module, but use the newer BUSCO script. Also we need to have a local Augustus config directory, so BUSCO has permission to muck around in it and make changes.
 
 ```bash
 module load busco/1.1b1
