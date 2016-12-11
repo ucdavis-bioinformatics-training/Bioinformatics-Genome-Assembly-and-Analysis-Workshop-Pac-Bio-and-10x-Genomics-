@@ -1,9 +1,9 @@
-## \(More\) Assembly QC
+# \(More\) Assembly QC
 
 Joe Fass - jnfass@ucdavis.edu  
 14 December 2016
 
-# N50 and Related Metrics
+## N50 and Related Metrics
 
 test N50; list sizes, add cumulative length column, print at desired cumulative length cutoff
 
@@ -16,7 +16,7 @@ cat pet_fungus.draft.fa | \
 
 ---
 
-# BUSCO
+## BUSCO
 
 First download a relevant lineage tarball from [Evgeny Zdobnov's lab](http://busco.ezlab.org/).
 
@@ -38,6 +38,12 @@ export AUGUSTUS_CONFIG_PATH=/share/biocore/jfass/Bioinformatics-Genome-Assembly-
     /share/biocore/jfass/Bioinformatics-Genome-Assembly-and-Analysis-Workshop-Pac-Bio-and-10x-Genomics-/fungi_odb9 \
     --mode genome -f
 ```
+
+## Variant viz (?)
+
+Now how to address variants found by falcon\_unzip? Try mauve-contig-reorder on all #F\_### contigs collected together (haplotigs) versus collected (or collected and reordered) primary contigs. Then progressive-mauve. Alternately separate haplotigs by each primary 'tig they align to (use LAST, or Zev's modified BLASR), to align each separately.
+
+
 
 
 
