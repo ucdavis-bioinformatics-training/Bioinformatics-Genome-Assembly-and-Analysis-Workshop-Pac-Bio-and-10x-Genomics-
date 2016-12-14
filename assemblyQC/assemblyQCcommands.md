@@ -14,6 +14,8 @@ cd ~/workshopStuff/assemblyQCfiles/
 ls -ltrha  # or alias ll='ls -ltrha'; ll
 ```
 
+---
+
 ## N50 and Related (Better!) Metrics
 
 Test *NG50*; list sizes, add cumulative length column, print at desired cumulative length cutoff  
@@ -68,9 +70,11 @@ tar xzvf busco-master-623f5a65e8467daea4dd1eedf13653a52de25897.tar.gz
     --mode genome -f  # beware; this will run for about a half hour
 ```
 
-## Variant visualization
+---
 
-Now how to address variants found by falcon\_unzip (found in 4-quiver/cns\_output/)? With draft genomes, we'll often reorder contigs to more closely match a trusted reference (see command below). But in this case, with discrete variants, this can create false LCBs that cross contig boundaries and (visually) imply missing sequence between them. Just run progressiveMauve on the consensus haplotigs versus the consensus primotigs.
+## Variant Visualization
+
+How can we look at the variants found by falcon\_unzip (found in 4-quiver/cns\_output/)? Mauve, a whole genome aligner, is one possibility. With draft genomes, we'll often reorder contigs to more closely match a trusted reference (see command below). But in this case, with discrete variants, this can create false LCBs that cross contig boundaries and (visually) imply missing sequence between them. Just run progressiveMauve on the consensus haplotigs versus the consensus primotigs.
 
 ```bash
 # wget http://darlinglab.org/mauve/snapshots/2015/2015-02-13/linux-x64/mauve_linux_snapshot_2015-02-13.tar.gz
@@ -83,11 +87,15 @@ mkdir ../mauve.progMauve
 cd ..
 ```
 
-We'll need to pull the alignment files down to a local machine to view them.  
+We'll need to pull the alignment files down to a local machine to view them:  
 
 ```bash
 # for ~~example~~:
+cd ~/Documents/
 scp -r class8@cabernet.genomecenter.ucdavis.edu:/home/class8/mauve.progMauve .
+# and we need the sequence files so Mauve can show nucleotides and sequence boundaries:
+cd ..
+scp -r class8@cabernet.genomecenter.ucdavis.edu:/home/class8/cns*fasta .
 ```
 
 Inspect the alignment by launching Mauve, then File --> Open alignment.  
