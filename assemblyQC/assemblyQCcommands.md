@@ -8,6 +8,7 @@ Joe Fass - jnfass@ucdavis.edu
 Copy my data and scripts into your home somewheres:
 
 ```bash
+mkdir workshopStuff
 cp -av /share/biocore/workshops/Genome-Assembly-Workshop/examples/assemblyQC.joe/setup \
     ~/workshopStuff/assemblyQCfiles
 cd ~/workshopStuff/assemblyQCfiles/
@@ -60,7 +61,7 @@ tar xzvf fungi_odb9.tar.gz
 # download augustus-3.0.3 locally, to point at local config directory
 # wget http://bioinf.uni-greifswald.de/augustus/binaries/old/augustus-3.0.3.tar.gz
 tar xzvf augustus-3.0.3.tar.gz
-export AUGUSTUS_CONFIG_PATH= {~~~~~full/path/to/your/working/directory~~~~~} /augustus-3.0.3/config/
+export AUGUSTUS_CONFIG_PATH={~~~~~full/path/to/your/working/directory~~~~~}/augustus-3.0.3/config/  # replace "{...}"
 # download BUSCO 2.0 locally to use updated script
 tar xzvf busco-master-623f5a65e8467daea4dd1eedf13653a52de25897.tar.gz
 # ... and run BUSCO on our FALCON primary contigs!:
@@ -82,7 +83,7 @@ tar xzvf mauve_linux_snapshot_2015-02-13.tar.gz
 cd mauve_snapshot_2015-02-13/
 # java -Xmx5g -cp Mauve.jar org.gel.mauve.contigs.ContigOrderer -output ../mauve.reorder -ref ../published.fasta -draft ../p_ctg.fa  # example for draft genome versus a published relative
 mkdir ../mauve.progMauve
-# progressiveMauve runs on this data in about 5 minutes, but takes maybe 15 minutes to fully write and close the output!
+# progressiveMauve runs on this data in about 5 minutes, but took (for me) ~15 minutes to fully write and close the output!
 ./linux-x64/progressiveMauve --output=../mauve.progMauve/aln.xmfa ../cns_p_ctg.fasta ../cns_h_ctg.fasta
 cd ..
 ```
