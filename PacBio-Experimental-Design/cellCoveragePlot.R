@@ -6,9 +6,10 @@
 #    http://shiny.rstudio.com/
 #
 ## Requires packages installed
-#install.packages(c("rjson",devtools"))
+#install.packages(c("rjson",devtools","plotly"))
 
 library(rjson)
+library(plotly)
 
 infile = "input.fofn.stats"
 genome_size=1.5e9
@@ -95,3 +96,23 @@ lines(x=(length(k10)+1):smrt_cells,y=(cumsum(ek10)+tail(cumsum(k10),1))/genome_s
 lines(x=(length(k12)+1):smrt_cells,y=(cumsum(ek12)+tail(cumsum(k12),1))/genome_size,type='l',lty=2,col="green")
 
 ####################################################################
+
+
+###########
+## Start Plotly version
+covDat = data.frame(cellNumber = rep(1:length(k0), 4), 
+                    coverage = c(cumsum(k0)/genome_size, cumsum(k8)/genome_size, cumsum(k10)/genome_size, cumsum(k12)/genome_size),
+                    cutoff =factor(c(rep("0 kb", length(k0)), rep("8 kb", length(k0)), rep("10 kb", length(k0)), rep("12 kb", length(k0)))), stringsAsFactors = F)
+covDat$cutoff = factor(covDat$cutoff, levels = levels(covDat$cutoff)[order(as.numeric(sapply(levels(covDat$cutoff), function(x) unlist(strsplit(x, " "))[1])))] )
+
+covDatPred = data.frame(cellNumber = c((length(k0)+1):smrt_cells, (length(k8)+1):smrt_cells, (length(k10)+1):smrt_cells, (length(k12)+1):smrt_cells), 
+                    coverage = c((cumsum(ek0)+tail(cumsum(k0),1))/genome_size, (cumsum(ek8)+tail(cumsum(k8),1))/genome_size, (cumsum(ek10)+tail(cumsum(k10),1))/genome_size, (cumsum(ek12)+tail(cumsum(k12),1))/genome_size),
+                    cutoff =factor(c(rep("0 kb", smrt_cells-length(k0)), rep("8 kb", smrt_cells-length(k0)), rep("10 kb", smrt_cells-length(k0)), rep("12 kb", smrt_cells-length(k0)))), stringsAsFactors = F)
+covDatPred$cutoff = factor(covDatPred$cutoff, levels = levels(covDatPred$cutoff)[order(as.numeric(sapply(levels(covDatPred$cutoff), function(x) unlist(strsplit(x, " "))[1])))] )
+
+p = plot_ly(covDat, x=~cellNumber, y=~coverage, color=~cutoff, mode="lines", type="scatter") %>% layout(xaxis = list(range = c(0,smrt_cells)), yaxis = list(range = c(0,target_raw_coverage))) %>%
+  add_lines(x=covDatPred$cellNumber, y=covDatPred$coverage, color=covDatPred$cutoff, line = list(dash="dash"), showlegend = FALSE)
+p
+htmlwidgets::saveWidget(as.widget(p), "coverageByCell.html")
+
+# /////////
